@@ -25,6 +25,16 @@ public class User implements Serializable {
 	private String password;
 	private Long phone;
 	private String workArea;
+	private String type;
+
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public Long getId() {
 		return id;

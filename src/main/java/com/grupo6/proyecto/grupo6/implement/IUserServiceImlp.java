@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.grupo6.proyecto.grupo6.dao.IUserDao;
 import com.grupo6.proyecto.grupo6.entity.User;
@@ -29,7 +28,8 @@ public class IUserServiceImlp implements IUserService{
 	@Override
 	public Page<User> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return userDao.findAll(pageable);
+		String data = "administracion";
+		return userDao.findAllByType(pageable,data);
 	}
 
 	@Override

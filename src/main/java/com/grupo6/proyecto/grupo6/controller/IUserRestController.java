@@ -93,11 +93,13 @@ public class IUserRestController {
 
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al crear el User");
+			response.put("type","error");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		response.put("mensaje", "El usuario ha sido creado con Exito");
+		response.put("type","success");
 		response.put("user", usernew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 
@@ -123,7 +125,7 @@ public class IUserRestController {
 		}
 
 		if (userActual == null) {
-			response.put("mensaje", "Error el cliente ID:  ".concat(id.toString().concat(" no se pudo editar")));
+			response.put("mensaje", "Error el Usuario ID:  ".concat(id.toString().concat(" no se pudo editar")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 
@@ -137,12 +139,14 @@ public class IUserRestController {
 			
 			userUpdate = userService.save(userActual);
 		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al actualizar el Cliente");
+			response.put("mensaje", "Error al actualizar el Usuario");
+			response.put("type","error");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		response.put("mensaje", "El Usuario ha sido atualizado con Exito");
+		response.put("type","success");
 		response.put("user", userUpdate);
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
@@ -160,11 +164,13 @@ public class IUserRestController {
 			userService.delete(id);
 		} catch (DataAccessException e) {
 			response.put("mensaje","Error en eliminar el usuario , comunicarse con Frank");
+			response.put("type","error");
 			response.put("error",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		response.put("mensaje", "Usuario Eliminado con Exito");
+		response.put("type","success");
 		return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
 		
 	}

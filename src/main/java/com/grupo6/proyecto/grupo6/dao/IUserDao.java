@@ -11,6 +11,6 @@ import com.grupo6.proyecto.grupo6.entity.User;
 
 
 public interface IUserDao extends JpaRepository<User, Long>{
-	
 
+    Page<User> findAllByType(Pageable pageable,String dato);
 }
