@@ -28,7 +28,7 @@ public class IUserServiceImlp implements IUserService{
 	@Override
 	public Page<User> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
-		String data = "administracion";
+		String data = "administration";
 		return userDao.findAllByType(pageable,data);
 	}
 

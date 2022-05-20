@@ -72,7 +72,7 @@ public class IRegistrationRestController {
                                     BindingResult result) {
         Registrations regnew = null;
         User userData = null;
-        Recomendations recData = null;
+        String type ="register";
         Map<String, Object> response = new HashMap<>();
 
         if (result.hasErrors()) {
@@ -84,6 +84,7 @@ public class IRegistrationRestController {
         }
 
         try {
+            user.setType(type);
             userData = userService.save(user);
             registrations.setUserId(userData.getId());
             regnew = registrationsService.save(registrations);
