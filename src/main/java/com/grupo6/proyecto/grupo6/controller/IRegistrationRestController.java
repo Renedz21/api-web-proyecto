@@ -68,20 +68,12 @@ public class IRegistrationRestController {
 
 
     @PostMapping("/registrations")
-    public ResponseEntity<?> create(@Valid @RequestBody Registrations registrations, User user,
-                                    BindingResult result) {
+    public ResponseEntity<?> create(@RequestBody Registrations registrations,
+                                    @RequestBody User user) {
         Registrations regnew = null;
         User userData = null;
         String type ="register";
         Map<String, Object> response = new HashMap<>();
-
-        if (result.hasErrors()) {
-            List<String> errors = result.getFieldErrors().stream()
-                    .map(err -> "El Campo '" + err.getField() + "'" + err.getDefaultMessage())
-                    .collect(Collectors.toList());
-            response.put("errors", errors);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
 
         try {
             user.setType(type);
