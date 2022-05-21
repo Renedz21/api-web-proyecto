@@ -78,6 +78,7 @@ public class IUserRestController {
 	public ResponseEntity<?> create(@Valid @RequestBody User cliente, 
 											BindingResult result) {
 		User usernew = null;
+		String type ="administration";
 		Map<String, Object> response = new HashMap<>();
 
 		if (result.hasErrors()) {
@@ -89,6 +90,7 @@ public class IUserRestController {
 		}
 
 		try {
+			cliente.setType(type);
 			usernew = userService.save(cliente);
 
 		} catch (DataAccessException e) {
