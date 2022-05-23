@@ -3,6 +3,7 @@ package com.grupo6.proyecto.grupo6.controller;
 import com.grupo6.proyecto.grupo6.entity.Recomendations;
 import com.grupo6.proyecto.grupo6.entity.Registrations;
 import com.grupo6.proyecto.grupo6.entity.User;
+import com.grupo6.proyecto.grupo6.pojo.RegistrationData;
 import com.grupo6.proyecto.grupo6.service.IRecomendationsService;
 import com.grupo6.proyecto.grupo6.service.IRegistrationsService;
 import com.grupo6.proyecto.grupo6.service.IUserService;
@@ -68,8 +69,20 @@ public class IRegistrationRestController {
 
 
     @PostMapping("/registrations")
-    public ResponseEntity<?> create(@RequestBody Registrations registrations,
-                                    @RequestBody User user) {
+    public ResponseEntity<?> create(@RequestBody RegistrationData data ) {
+        //-----------------INICIO SETEO DE DATOS-----------------
+        Registrations registrations = null;
+        //datos de la clase recomendation
+        registrations.setWord(data.getWord());
+        registrations.setRecomendationId(data.getRecomendationId());
+        //datos de la clase usuario
+        User user = null;
+        user.setLastName(data.getLastName());
+        user.setLastName(data.getLastName());
+        user.setAge(data.getAge());
+        user.setPhone(data.getPhone());
+        user.setWorkArea(data.getWorkArea());
+        //-----------------FIN SETEO DE DATOS-----------------
         Registrations regnew = null;
         User userData = null;
         String type ="register";
@@ -77,6 +90,8 @@ public class IRegistrationRestController {
 
         try {
             user.setType(type);
+            System.out.println(user.getFirstName());
+            System.out.println(user.getLastName());
             userData = userService.save(user);
             registrations.setUserId(userData.getId());
             regnew = registrationsService.save(registrations);
