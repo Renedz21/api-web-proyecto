@@ -71,14 +71,13 @@ public class IRegistrationRestController {
     @PostMapping("/registrations")
     public ResponseEntity<?> create(@RequestBody RegistrationData data ) {
         //-----------------INICIO SETEO DE DATOS-----------------
-        Registrations registrations = null;
+        Registrations registrations = new Registrations();
         //datos de la clase recomendation
         registrations.setWord(data.getWord());
         registrations.setRecomendationId(data.getRecomendationId());
         //datos de la clase usuario
-        User user = null;
-        user.setLastName(data.getLastName());
-        user.setLastName(data.getLastName());
+        User user = new User();
+        user.setName(data.getName());
         user.setAge(data.getAge());
         user.setPhone(data.getPhone());
         user.setWorkArea(data.getWorkArea());
@@ -90,8 +89,7 @@ public class IRegistrationRestController {
 
         try {
             user.setType(type);
-            System.out.println(user.getFirstName());
-            System.out.println(user.getLastName());
+            System.out.println(user.getName());
             userData = userService.save(user);
             registrations.setUserId(userData.getId());
             regnew = registrationsService.save(registrations);
