@@ -14,7 +14,6 @@ public interface IRegistrationDao extends JpaRepository<Registrations, Long> {
             "inner join users u " +
             "on r.userId = u.id " +
             "inner join recomendations c " +
-            "on r.recomendationId = c.id " +
-            "and u.type='register' ")
-    Page<Registrations> findAllByFilter(Pageable pageable, @Param("dato") String dato);
+            "on r.recomendationId = c.level ")
+    Page<Registrations> findAllByFilter(Pageable pageable);
 }

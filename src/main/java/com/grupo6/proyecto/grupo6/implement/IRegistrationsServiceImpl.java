@@ -23,8 +23,7 @@ public class IRegistrationsServiceImpl implements IRegistrationsService {
 
     @Override
     public Page<Registrations> findAll(Pageable pageable) {
-        String data= "register";
-        return registrationDao.findAllByFilter(pageable,data);
+        return registrationDao.findAllByFilter(pageable);
     }
 
     @Override
