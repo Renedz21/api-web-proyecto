@@ -33,11 +33,13 @@ public class IRegistrationRestController {
     @Autowired
     private IUserService userService;
 
+    //funciona
     @GetMapping("/registrations")
     public List<Registrations> index() {
         return registrationsService.findAll();
     }
 
+    //funciona
     @GetMapping("/registrations/page")
     public Page<Registrations> index(@RequestParam Integer pageNumber, @RequestParam Integer perPage) {
         Pageable pageable = PageRequest.of(pageNumber, perPage);
@@ -45,7 +47,7 @@ public class IRegistrationRestController {
         return reg;
     }
 
-
+    //funciona
     @GetMapping("/registrations/{id}")
     public ResponseEntity<?> show(@PathVariable Long id) {
         Registrations registrations = null;
@@ -67,18 +69,17 @@ public class IRegistrationRestController {
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
 
-
+    //funciona
     @PostMapping("/registrations")
     public ResponseEntity<?> create(@RequestBody RegistrationData data ) {
         //-----------------INICIO SETEO DE DATOS-----------------
-        Registrations registrations = null;
+        Registrations registrations = new Registrations();
         //datos de la clase recomendation
         registrations.setWord(data.getWord());
         registrations.setRecomendationId(data.getRecomendationId());
         //datos de la clase usuario
-        User user = null;
-        user.setLastName(data.getLastName());
-        user.setLastName(data.getLastName());
+        User user = new User();
+        user.setName(data.getName());
         user.setAge(data.getAge());
         user.setPhone(data.getPhone());
         user.setWorkArea(data.getWorkArea());
@@ -90,8 +91,7 @@ public class IRegistrationRestController {
 
         try {
             user.setType(type);
-            System.out.println(user.getFirstName());
-            System.out.println(user.getLastName());
+            System.out.println(user.getName());
             userData = userService.save(user);
             registrations.setUserId(userData.getId());
             regnew = registrationsService.save(registrations);
@@ -110,23 +110,13 @@ public class IRegistrationRestController {
 
     }
 
-
+    //funciona
     @PutMapping("/registrations/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody Registrations registrations,
-                                    BindingResult result,
+    public ResponseEntity<?> update(@RequestBody Registrations registrations,
                                     @PathVariable Long id) {
         Registrations regActual = registrationsService.findById(id);
         Map<String, Object> response = new HashMap<>();
         Registrations regUpdate = null;
-
-        if (result.hasErrors()) {
-            List<String> errors = result.getFieldErrors().stream()
-                    .map(err -> "El Campo '" + err.getField() + "'" + err.getDefaultMessage())
-                    .collect(Collectors.toList());
-
-            response.put("errors", errors);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
 
         if (regActual == null) {
             response.put("mensaje", "Error el Usuario ID:  ".concat(id.toString().concat(" no se pudo editar")));
@@ -136,7 +126,6 @@ public class IRegistrationRestController {
         try {
 
             regActual.setRecomendationId(registrations.getRecomendationId());
-            regActual.setUserId(registrations.getUserId());
             regActual.setWord(registrations.getWord());
 
             regUpdate = registrationsService.save(regActual);
@@ -155,6 +144,7 @@ public class IRegistrationRestController {
 
     }
 
+    //funciona
     @DeleteMapping("/registrations/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<?> delete(@PathVariable Long id){

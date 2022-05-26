@@ -133,8 +133,7 @@ public class IUserRestController {
 
 		try {
 
-			userActual.setFirstName(user.getFirstName());
-			userActual.setLastName(user.getLastName());
+			userActual.setName(user.getName());
 			userActual.setAge(user.getAge());
 			userActual.setPhone(user.getPhone());
 			userActual.setWorkArea(user.getWorkArea());

@@ -5,8 +5,7 @@ public class RegistrationData {
     private String word;
     private Long recomendationId;
     //datos importantes de la tabla User
-    private String firstName;
-    private String lastName;
+    private String Name;
     private Long age;
     private Long phone;
     private String workArea;
@@ -27,20 +26,12 @@ public class RegistrationData {
         this.recomendationId = recomendationId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return Name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        Name = name;
     }
 
     public Long getAge() {
