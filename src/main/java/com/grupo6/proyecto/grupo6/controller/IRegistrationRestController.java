@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.Registration;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -71,29 +72,14 @@ public class IRegistrationRestController {
 
     //funciona
     @PostMapping("/registrations")
-    public ResponseEntity<?> create(@RequestBody RegistrationData data ) {
+    public ResponseEntity<?> create(@RequestBody Registration data ) {
         //-----------------INICIO SETEO DE DATOS-----------------
         Registrations registrations = new Registrations();
-        //datos de la clase recomendation
-        registrations.setWord(data.getWord());
-        registrations.setRecomendationId(data.getRecomendationId());
-        //datos de la clase usuario
-        User user = new User();
-        user.setName(data.getName());
-        user.setAge(data.getAge());
-        user.setPhone(data.getPhone());
-        user.setWorkArea(data.getWorkArea());
         //-----------------FIN SETEO DE DATOS-----------------
         Registrations regnew = null;
-        User userData = null;
-        String type ="register";
         Map<String, Object> response = new HashMap<>();
 
         try {
-            user.setType(type);
-            System.out.println(user.getName());
-            userData = userService.save(user);
-            registrations.setUserId(userData.getId());
             regnew = registrationsService.save(registrations);
 
         } catch (DataAccessException e) {
