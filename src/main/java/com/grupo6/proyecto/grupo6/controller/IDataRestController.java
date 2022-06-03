@@ -67,7 +67,7 @@ public class IDataRestController {
     @GetMapping("/data/result/{id}")
     public ResponseEntity<?> show(@PathVariable String id) {
         List<Data> data = null;
-        Recomendations recomendations = null;
+        List<Recomendations> recomendations = null;
         Map<String, Object> response = new HashMap<>();
         Integer prom =0;
         Integer datCal = 0;

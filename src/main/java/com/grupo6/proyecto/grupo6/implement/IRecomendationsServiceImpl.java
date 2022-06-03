@@ -43,7 +43,7 @@ public class IRecomendationsServiceImpl implements IRecomendationsService {
     }
 
     @Override
-    public Recomendations findAllByLevel(Long id) {
+    public List<Recomendations> findAllByLevel(Long id) {
         return recomendationsDao.findAllByLevel(id);
     }
 }

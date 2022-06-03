@@ -110,6 +110,8 @@ public class IRegistrationRestController {
 
     }
 
+
+
     //funciona
     @PutMapping("/registrations/{id}")
     public ResponseEntity<?> update(@RequestBody Registrations registrations,

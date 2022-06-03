@@ -18,5 +18,5 @@ public interface IRecomendationsService {
 
     public void delete(Long id);
 
-    public Recomendations findAllByLevel(Long id);
+    public List<Recomendations> findAllByLevel(Long id);
 }
