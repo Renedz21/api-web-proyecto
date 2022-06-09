@@ -137,7 +137,7 @@ public class IUserRestController {
 			userActual.setAge(user.getAge());
 			userActual.setPhone(user.getPhone());
 			userActual.setWorkArea(user.getWorkArea());
-			
+			userActual.setGenero(user.getGenero());
 			userUpdate = userService.save(userActual);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al actualizar el Usuario");

@@ -40,4 +40,9 @@ public class IRegistrationsServiceImpl implements IRegistrationsService {
     public void delete(Long id) {
         registrationDao.deleteById(id);
     }
+
+    @Override
+    public Integer catRegistrations() {
+        return registrationDao.cantidadRegister();
+    }
 }

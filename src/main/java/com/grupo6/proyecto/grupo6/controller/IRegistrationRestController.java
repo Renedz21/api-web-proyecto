@@ -72,7 +72,7 @@ public class IRegistrationRestController {
 
     //funciona
     @PostMapping("/registrations")
-    public ResponseEntity<?> create(@RequestBody Registration data ) {
+    public ResponseEntity<?> create(@RequestBody Registrations data ) {
         //-----------------INICIO SETEO DE DATOS-----------------
         Registrations registrations = new Registrations();
         //-----------------FIN SETEO DE DATOS-----------------
@@ -80,7 +80,7 @@ public class IRegistrationRestController {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            regnew = registrationsService.save(registrations);
+            regnew = registrationsService.save(data);
 
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al crear el Registro");
@@ -96,6 +96,39 @@ public class IRegistrationRestController {
 
     }
 
+    //crear usuario desde el formulario
+    @PostMapping("/users/form")
+    public ResponseEntity<?> create(@Valid @RequestBody User cliente,
+                                    BindingResult result) {
+        User usernew = null;
+        String type ="registration";
+        Map<String, Object> response = new HashMap<>();
+
+        if (result.hasErrors()) {
+            List<String> errors = result.getFieldErrors().stream()
+                    .map(err -> "El Campo '" + err.getField() + "'" + err.getDefaultMessage())
+                    .collect(Collectors.toList());
+            response.put("errors", errors);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+            cliente.setType(type);
+            usernew = userService.save(cliente);
+
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error al crear el User");
+            response.put("type","error");
+            response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        response.put("mensaje", "El usuario ha sido creado con Exito");
+        response.put("type","success");
+        response.put("user", usernew);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+
+    }
 
 
     //funciona
