@@ -6,6 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
+
+
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
@@ -27,4 +35,5 @@ public class Application implements CommandLineRunner {
 		//TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		//System.out.println("time zone "+TimeZone.getDefault());
 	}
+
 }
