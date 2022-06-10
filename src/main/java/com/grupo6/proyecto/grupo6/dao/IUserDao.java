@@ -13,4 +13,9 @@ import com.grupo6.proyecto.grupo6.entity.User;
 public interface IUserDao extends JpaRepository<User, Long>{
 
     Page<User> findAllByType(Pageable pageable,String dato);
+
+    @Query(value = "SELECT count(u) from users u")
+    Integer cantidadUser();
+
+    Integer countByGenero(String genero);
 }

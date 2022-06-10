@@ -17,4 +17,6 @@ public interface IRegistrationsService {
     public Registrations save(Registrations data);
 
     public void delete(Long id);
+
+    public Integer catRegistrations();
 }

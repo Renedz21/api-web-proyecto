@@ -50,4 +50,14 @@ public class IUserServiceImlp implements IUserService{
 		
 	}
 
+	@Override
+	public Integer cantidadUser() {
+		return userDao.cantidadUser();
+	}
+
+	@Override
+	public Integer countByGenero(String genero) {
+		return userDao.countByGenero(genero);
+	}
+
 }

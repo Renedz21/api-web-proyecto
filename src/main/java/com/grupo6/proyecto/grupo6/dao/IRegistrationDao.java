@@ -16,4 +16,7 @@ public interface IRegistrationDao extends JpaRepository<Registrations, Long> {
             "inner join recomendations c " +
             "on r.recomendationId = c.level ")
     Page<Registrations> findAllByFilter(Pageable pageable);
+
+    @Query(value = "SELECT count(r) from registrations r")
+    Integer cantidadRegister();
 }

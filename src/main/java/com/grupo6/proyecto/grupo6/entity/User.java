@@ -25,7 +25,15 @@ public class User implements Serializable {
 	private Long phone;
 	private String workArea;
 	private String type;
+	private String genero;
 
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 
 	public String getType() {
 		return type;

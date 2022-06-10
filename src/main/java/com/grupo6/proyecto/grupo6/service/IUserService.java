@@ -19,4 +19,7 @@ public interface IUserService {
 
 	public void delete(Long id);
 
+	public Integer cantidadUser();
+
+	public Integer countByGenero(String genero);
 }
