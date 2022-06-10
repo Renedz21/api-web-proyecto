@@ -1,13 +1,9 @@
 package com.grupo6.proyecto.grupo6.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity(name = "users")
@@ -26,6 +22,17 @@ public class User implements Serializable {
 	private String workArea;
 	private String type;
 	private String genero;
+
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Roles> roles;
+
+	public List<Roles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
+	}
 
 	public String getGenero() {
 		return genero;
