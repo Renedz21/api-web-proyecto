@@ -97,6 +97,43 @@ public class IRegistrationRestController {
 
     }
 
+    @PostMapping("/registrations/{dni}")
+    public ResponseEntity<?> create(@RequestBody Registrations data,
+                                    @PathVariable Long dni) {
+        Registrations regnew = null;
+        User dataFind = null;
+        Long count;
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            dataFind = userService.findById(data.getUserId());
+            if(dataFind.getDni().equals(dni)){
+                count = dataFind.getCantlog() + 1;
+                dataFind.setCantlog(count);
+                userService.save(dataFind);
+                regnew = registrationsService.save(data);
+            }else {
+                response.put("mensaje", "DNI incorrecto");
+                response.put("type","error");
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            }
+
+
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error al crear el Registro");
+            response.put("type","error");
+            response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        response.put("mensaje", "El Registro ha sido creado con Exito");
+        response.put("type","success");
+        response.put("registrations", regnew);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+
+    }
+
+
     //crear usuario desde el formulario
     @PostMapping("/users/form")
     public ResponseEntity<?> create(@Valid @RequestBody User cliente,
