@@ -2,6 +2,7 @@ package com.grupo6.proyecto.grupo6.implement;
 
 import com.grupo6.proyecto.grupo6.dao.IRegistrationDao;
 import com.grupo6.proyecto.grupo6.entity.Registrations;
+import com.grupo6.proyecto.grupo6.pojo.CantRepWord;
 import com.grupo6.proyecto.grupo6.service.IRegistrationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,5 +45,10 @@ public class IRegistrationsServiceImpl implements IRegistrationsService {
     @Override
     public Integer catRegistrations() {
         return registrationDao.cantidadRegister();
+    }
+
+    @Override
+    public List<CantRepWord> cantRep() {
+        return registrationDao.cantRep();
     }
 }

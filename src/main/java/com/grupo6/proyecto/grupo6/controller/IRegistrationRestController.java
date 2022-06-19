@@ -3,6 +3,7 @@ package com.grupo6.proyecto.grupo6.controller;
 import com.grupo6.proyecto.grupo6.entity.Recomendations;
 import com.grupo6.proyecto.grupo6.entity.Registrations;
 import com.grupo6.proyecto.grupo6.entity.User;
+import com.grupo6.proyecto.grupo6.pojo.CantRepWord;
 import com.grupo6.proyecto.grupo6.pojo.RegistrationData;
 import com.grupo6.proyecto.grupo6.service.IRecomendationsService;
 import com.grupo6.proyecto.grupo6.service.IRegistrationsService;
@@ -185,4 +186,12 @@ public class IRegistrationRestController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
 
     }
+
+    @GetMapping("/registrations/cantidad")
+    public List<CantRepWord> returnCant() {
+        List<CantRepWord> cant = registrationsService.cantRep();
+        return cant;
+    }
+
+
 }
