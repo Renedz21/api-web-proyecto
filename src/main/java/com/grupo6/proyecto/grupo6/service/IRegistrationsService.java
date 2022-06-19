@@ -22,4 +22,6 @@ public interface IRegistrationsService {
     public Integer catRegistrations();
 
     public List<CantRepWord> cantRep();
+
+    public List<Registrations> findByUserId(Long id);
 }

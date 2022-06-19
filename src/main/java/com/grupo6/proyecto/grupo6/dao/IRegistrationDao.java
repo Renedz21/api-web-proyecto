@@ -30,4 +30,5 @@ public interface IRegistrationDao extends JpaRepository<Registrations, Long> {
             "order by count(r.word) desc ")
     List<CantRepWord> cantRep();
 
+    List<Registrations> findByUserId(Long id);
 }

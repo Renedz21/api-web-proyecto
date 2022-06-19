@@ -230,5 +230,25 @@ public class IRegistrationRestController {
         return cant;
     }
 
+    @GetMapping("/registrations/info/data/{id}")
+    public ResponseEntity<?> indexData(@PathVariable Long id) {
+        List<Registrations> registrations = null;
+        Map<String, Object> response = new HashMap<>();
+        try {
+            registrations = registrationsService.findByUserId(id);
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error al buscar el Historial de Registro en la base de datos");
+            response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (registrations == null) {
+            response.put("mensaje", "El Registro con ID:  ".concat(id.toString().concat(" no existe en al base de datos")));
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+
+        response.put("registrations", registrations);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+    }
 
 }

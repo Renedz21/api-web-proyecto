@@ -51,4 +51,9 @@ public class IRegistrationsServiceImpl implements IRegistrationsService {
     public List<CantRepWord> cantRep() {
         return registrationDao.cantRep();
     }
+
+    @Override
+    public List<Registrations> findByUserId(Long id) {
+        return registrationDao.findByUserId(id);
+    }
 }
