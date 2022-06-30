@@ -22,6 +22,25 @@ public class User implements Serializable {
 	private String workArea;
 	private String type;
 	private String genero;
+	private Long cantlog;
+
+	public Long getCantlog() {
+		return cantlog;
+	}
+
+	public void setCantlog(Long cantlog) {
+		this.cantlog = cantlog;
+	}
+
+	private Long dni;
+
+	public Long getDni() {
+		return dni;
+	}
+
+	public void setDni(Long dni) {
+		this.dni = dni;
+	}
 
 	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Roles> roles;
